@@ -6,9 +6,10 @@ import SignBtn from "./ui/SignBtn";
 
 export default function Header() {
   const { data: session } = useSession();
+  console.log(session, "@세션");
 
   return (
-    <header className='w-full sticky top-0 shadow-md p-4'>
+    <>
       <div className='flex justify-between items-center'>
         <h1 className='font-bold text-3xl'>
           <Link href={"/"}>Daily Planner</Link>
@@ -24,6 +25,6 @@ export default function Header() {
           )}
         </nav>
       </div>
-    </header>
+    </>
   );
 }

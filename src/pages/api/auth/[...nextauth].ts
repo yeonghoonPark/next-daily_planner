@@ -1,3 +1,4 @@
+import { addUser } from "@/service/user";
 import NextAuth, { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 export const authOptions: NextAuthOptions = {
@@ -13,6 +14,23 @@ export const authOptions: NextAuthOptions = {
   },
 
   callbacks: {
+    async signIn({ user: { id, name, email, image } }) {
+      // 구글 로그인시 기술적으로는 email과 name이 없을 수 없으나 OAuthUser타입에 정보가 옵셔널로 지정해있음에 따라 if문 생성
+      if (!email) {
+        return false;
+      }
+
+      addUser({
+        id,
+        name: name ?? "",
+        email,
+        image,
+        nickname: email?.split("@")[0],
+      });
+
+      return true;
+    },
+
     async session({ session }) {
       const user = session?.user;
       if (user) {

@@ -19,8 +19,13 @@ export default function RootLayout({
     <html lang='en' className={inter.className}>
       <body>
         <AuthContext>
-          <Header />
-          <main>{children}</main>
+          <header className='w-full sticky top-0 shadow-md p-4'>
+            <Header />
+          </header>
+          <main>
+            {/* */}
+            {children}
+          </main>
         </AuthContext>
       </body>
     </html>
