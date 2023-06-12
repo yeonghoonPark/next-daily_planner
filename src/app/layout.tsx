@@ -1,9 +1,9 @@
 import "./globals.css";
-import { Inter } from "next/font/google";
+import { Open_Sans } from "next/font/google";
 import Header from "@/components/Header";
 import AuthContext from "@/context/AuthContext";
 
-const inter = Inter({ subsets: ["latin"] });
+const openSans = Open_Sans({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Create Next App",
@@ -16,7 +16,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang='en' className={inter.className}>
+    <html lang='en' className={openSans.className}>
       <body>
         <AuthContext>
           <header className='w-full sticky top-0 shadow-md p-4'>
@@ -27,6 +27,7 @@ export default function RootLayout({
             {children}
           </main>
         </AuthContext>
+        <div id='portal' />
       </body>
     </html>
   );

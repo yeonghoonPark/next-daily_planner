@@ -5,7 +5,7 @@ type Props = {
   onClick?: () => void;
 };
 
-export default function SignBtn({
+export default function BaseBtn({
   onClick,
   text,
   size = "small",
@@ -23,7 +23,7 @@ export default function SignBtn({
       bg-white 
       hover:bg-black 
       hover:text-white
-      ${size === "small" ? "p-1 text-base" : "p-4 text-xl"}
+      ${size === "small" ? "p-2 text-base" : "p-4 text-xl"}
       `}
       onClick={onClick}
     >

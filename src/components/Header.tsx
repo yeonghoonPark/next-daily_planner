@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useSession, signOut } from "next-auth/react";
-import SignBtn from "./ui/SignBtn";
+import BaseBtn from "./ui/BaseBtn";
 
 export default function Header() {
   const { data: session } = useSession();
@@ -17,10 +17,10 @@ export default function Header() {
 
         <nav>
           {session ? (
-            <SignBtn onClick={() => signOut()} text={"Sign Out"} />
+            <BaseBtn onClick={() => signOut()} text={"Sign Out"} />
           ) : (
             <Link href={"/auth/signin"}>
-              <SignBtn text={"Sign In"} />
+              <BaseBtn text={"Sign In"} />
             </Link>
           )}
         </nav>

@@ -20,7 +20,7 @@ export async function addUser({ id, nickname, name, email, image }: OAuthUser) {
   });
 }
 
-export async function getUser(userEmail: string) {
+export async function getUserByEmail(userEmail: string) {
   return client.fetch(
     `
     *[_type == "user" && name == "${userEmail}"][0]
@@ -29,7 +29,7 @@ export async function getUser(userEmail: string) {
   );
 }
 
-export async function getTodos(userEmail: string) {
+export async function getTodosByEmail(userEmail: string) {
   return client.fetch(
     `
       *[_type == "user" && email == "${userEmail}"]
