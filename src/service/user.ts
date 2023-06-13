@@ -23,7 +23,7 @@ export async function addUser({ id, nickname, name, email, image }: OAuthUser) {
 export async function getUserByEmail(userEmail: string) {
   return client.fetch(
     `
-    *[_type == "user" && name == "${userEmail}"][0]
+      *[_type == "user" && name == "${userEmail}"][0]
     
     `,
   );
@@ -34,7 +34,27 @@ export async function getTodosByEmail(userEmail: string) {
     `
       *[_type == "user" && email == "${userEmail}"]
       [0]
-      {todos}
+      {todos | order(appointedTime asc)}
     `,
   );
 }
+
+export const createNewTodo = (
+  userId: string,
+  mission: string,
+  appointedTime: string,
+  isCompleted: boolean,
+) => {
+  return client
+    .patch(userId)
+    .setIfMissing({ todos: [] })
+    .append("todos", [
+      {
+        _type: "todo",
+        mission,
+        appointedTime,
+        isCompleted,
+      },
+    ])
+    .commit({ autoGenerateArrayKeys: true });
+};

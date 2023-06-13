@@ -1,4 +1,5 @@
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
+import { createNewTodo } from "@/service/user";
 import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -16,5 +17,7 @@ export async function POST(req: NextRequest) {
     return new Response("Bad Request", { status: 400 });
   }
 
-  return NextResponse.json("");
+  return createNewTodo(user.id, mission, appointedTime, isCompleted)
+    .then((res) => NextResponse.json(res))
+    .catch((err) => new Response(JSON.stringify(err), { status: 500 }));
 }

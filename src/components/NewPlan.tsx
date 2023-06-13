@@ -16,7 +16,7 @@ export default function NewPlan() {
       {isModalOpen && (
         <ModalPortal>
           <CreateNewPlanModal onClose={() => setIsModalOpen(false)}>
-            <CreateNewPlan />
+            <CreateNewPlan onClose={() => setIsModalOpen(false)} />
           </CreateNewPlanModal>
         </ModalPortal>
       )}

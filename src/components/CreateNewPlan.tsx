@@ -2,23 +2,41 @@ import { hours, minutes } from "@/util/time";
 import { FormEvent, useState } from "react";
 import Select from "./Select";
 import BaseBtn from "./ui/BaseBtn";
+import { useSWRConfig } from "swr";
 
-export default function CreateNewPlan() {
+type Props = {
+  onClose: () => void;
+};
+
+export default function CreateNewPlan({ onClose }: Props) {
   const [missionVal, setMissionVal] = useState("");
   const [hoursVal, setHoursVal] = useState("00");
   const [minutesVal, setMinutesVal] = useState("00");
 
+  const { mutate } = useSWRConfig();
+
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
 
-    fetch("/api/plan", {
+    fetch("/api/todos", {
       method: "POST",
       body: JSON.stringify({
         mission: missionVal,
         appointedTime: `${hoursVal}${minutesVal}`,
         isCompleted: false,
       }),
-    });
+    })
+      .then((res) => {
+        if (!res.ok) {
+          alert(`${res.status} ${res.statusText}`);
+          return;
+        }
+      })
+      .catch((err) => alert(err.toString()))
+      .finally(() => {
+        onClose();
+        mutate("/api/user");
+      });
   };
 
   return (

@@ -2,6 +2,7 @@ import "./globals.css";
 import { Open_Sans } from "next/font/google";
 import Header from "@/components/Header";
 import AuthContext from "@/context/AuthContext";
+import SWRConfigContext from "@/context/SWRConfigContext";
 
 const openSans = Open_Sans({ subsets: ["latin"] });
 
@@ -19,12 +20,11 @@ export default function RootLayout({
     <html lang='en' className={openSans.className}>
       <body>
         <AuthContext>
-          <header className='w-full sticky top-0 shadow-md p-4'>
+          <header className='w-full sticky top-0 shadow-md p-4 bg-slate-50'>
             <Header />
           </header>
           <main>
-            {/* */}
-            {children}
+            <SWRConfigContext>{children}</SWRConfigContext>
           </main>
         </AuthContext>
         <div id='portal' />
