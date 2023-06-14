@@ -1,7 +1,7 @@
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { getTodosByEmail, deleteTodo, updateTodo } from "@/service/user";
 import { getServerSession } from "next-auth";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 export async function GET() {
   const session = await getServerSession(authOptions);
@@ -17,7 +17,7 @@ export async function GET() {
 }
 
 // 기능은 DELETE 이지만 NextJS의 DELETE 메서드 이슈로 POST로 작성
-export async function POST(req: NextResponse) {
+export async function POST(req: NextRequest) {
   const session = await getServerSession(authOptions);
   const user = session?.user;
 
@@ -38,7 +38,7 @@ export async function POST(req: NextResponse) {
     .catch((err) => new Response(err, { status: 500 }));
 }
 
-export async function PUT(req: NextResponse) {
+export async function PUT(req: NextRequest) {
   const session = await getServerSession(authOptions);
   const user = session?.user;
 
