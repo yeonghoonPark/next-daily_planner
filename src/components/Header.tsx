@@ -6,7 +6,7 @@ import BaseBtn from "./ui/BaseBtn";
 
 export default function Header() {
   const { data: session } = useSession();
-
+  console.log(session, "##세션");
   return (
     <>
       <div className='flex justify-between items-center'>
