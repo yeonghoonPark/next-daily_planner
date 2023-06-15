@@ -47,12 +47,8 @@ export default function TodoCard({ todos }: Props) {
     <ul>
       {todos.map(({ mission, appointedTime, isCompleted, _key }) => (
         <li
-          className={`flex flex-col items-center w-[360px] gap-4 mb-4 border-2 rounded-md p-4 mt-4 
-          ${
-            isCompleted
-              ? "border-emerald-300 bg-emerald-800"
-              : "border-slate-300 bg-slate-50"
-          }`}
+          className={`flex flex-col items-center w-[312px] gap-4 mb-4 border-2 border-slate-300 rounded-md p-4 mt-4 
+          ${isCompleted ? "bg-emerald-500/40" : "bg-slate-50"}`}
           key={_key}
         >
           <div

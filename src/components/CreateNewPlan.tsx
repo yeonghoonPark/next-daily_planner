@@ -3,6 +3,7 @@ import { FormEvent, useState } from "react";
 import Select from "./Select";
 import BaseBtn from "./ui/BaseBtn";
 import { useSWRConfig } from "swr";
+import LoadingPackman from "./ui/LoadingPackman";
 
 type Props = {
   onClose: () => void;
@@ -13,10 +14,14 @@ export default function CreateNewPlan({ onClose }: Props) {
   const [hoursVal, setHoursVal] = useState("00");
   const [minutesVal, setMinutesVal] = useState("00");
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const { mutate } = useSWRConfig();
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
+
+    setIsLoading(true);
 
     fetch("/api/todos", {
       method: "POST",
@@ -34,13 +39,15 @@ export default function CreateNewPlan({ onClose }: Props) {
       })
       .catch((err) => alert(err.toString()))
       .finally(() => {
-        onClose();
         mutate("/api/user");
+        onClose();
+        setIsLoading(false);
       });
   };
 
   return (
     <>
+      {isLoading && <LoadingPackman bgColor='bg-emerald-100/50' />}
       <form
         className='flex flex-col justify-center items-center gap-8'
         onSubmit={handleSubmit}
