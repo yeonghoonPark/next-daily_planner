@@ -9,7 +9,7 @@ export default function LoadingPackman({ bgColor }: Props) {
     <div
       className={`fixed inset-0 flex justify-center items-center ${bgColor}`}
     >
-      <PacmanLoader size={50} color='#36d7b7' />
+      <PacmanLoader size={50} speedMultiplier={2} color='#36d7b7' />
     </div>
   );
 }

@@ -69,7 +69,7 @@ export default function CreateNewPlan({ onClose }: Props) {
 
           <label htmlFor='mission'>
             <input
-              className='outline-none border-2 border-slate-300 rounded-md p-2 focus:border-slate-500'
+              className='w-[140px] outline-none border-2 border-slate-300 rounded-md p-2 focus:border-slate-500'
               type='text'
               id='mission'
               required

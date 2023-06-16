@@ -1,4 +1,5 @@
 import { Todo } from "@/model/todos";
+import { useSWRConfig } from "swr";
 import BaseBtn from "./ui/BaseBtn";
 
 type Props = {
@@ -17,6 +18,8 @@ const getTimeText = (
 export default function TodoCard({ todos }: Props) {
   // console.log(todos, "@투드스");
 
+  const { mutate } = useSWRConfig();
+
   const handleCompleteBtn = (
     todoId: string,
     mission: string,
@@ -28,8 +31,14 @@ export default function TodoCard({ todos }: Props) {
       method: "PUT",
       body: JSON.stringify({ todoId, mission, appointedTime }),
     })
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+      .then((res) => {
+        if (!res.ok) {
+          alert(`${res.status} ${res.statusText}`);
+          return;
+        }
+        mutate("/api/user");
+      })
+      .catch((err) => alert(err.toString()));
   };
 
   const handleDeleteBtn = (todoId: string) => {
@@ -39,8 +48,14 @@ export default function TodoCard({ todos }: Props) {
       method: "POST",
       body: JSON.stringify({ todoId }),
     })
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+      .then((res) => {
+        if (!res.ok) {
+          alert(`${res.status} ${res.statusText}`);
+          return;
+        }
+        mutate("/api/user");
+      })
+      .catch((err) => alert(err.toString()));
   };
 
   return (

@@ -9,7 +9,7 @@ export default function CreateNewPlanModal({ children, onClose }: Props) {
       className='fixed inset-0 flex justify-center items-center bg-neutral-900/30'
       onClick={(e) => e.target === e.currentTarget && onClose()}
     >
-      <div className='flex justify-center items-center w-[380px] h-[176px] bg-white rounded-md border-2 border-slate-300'>
+      <div className='flex justify-center items-center w-[336px] h-[176px] bg-white rounded-md border-2 border-slate-300'>
         {children}
       </div>
     </section>

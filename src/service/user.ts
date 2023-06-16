@@ -65,8 +65,6 @@ export const updateTodo = async (
   mission: string,
   appointedTime: string,
 ) => {
-  console.log("@@@updateTodo@@@", todoId);
-
   return client
     .patch(userId) //
     .insert("replace", `todos[_key == "${todoId}"]`, [
